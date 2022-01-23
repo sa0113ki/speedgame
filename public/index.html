@@ -26,16 +26,16 @@
   </div>
   <div class="container2">
 
-          <img id="y1" src= "back.png" class="card" onclick="click"></img>
-          <img id="y2" src= "back.png" class="card" onclick="click"></img>
+          <img id="y1" src= "back.png" class="card"></img>
+          <img id="y2" src= "back.png" class="card"></img>
 
   </div>
   <div class="container1">
-        <img src= "back.png" id="p1" class="card" onclick="click()"></img>
-        <img src= "back.png" id="p2" class="card" onclick="click()"></img>
-        <img src= "back.png" id="p3" class="card" onclick="click()"></img>
-        <img src= "back.png" id="p4" class="card" onclick="click()"></img>
-        <img src= "back.png" id="p5" class="card" onclick="click()"></img>
+        <img src= "back.png" id="p1" class="card"></img>
+        <img src= "back.png" id="p2" class="card"></img>
+        <img src= "back.png" id="p3" class="card"></img>
+        <img src= "back.png" id="p4" class="card"></img>
+        <img src= "back.png" id="p5" class="card" ></img>
 
   </div>
   <div>
@@ -51,11 +51,15 @@
   var p2 = document.getElementById("p2");
   var p3 = document.getElementById("p3");
   var p4 = document.getElementById("p4");
+  var p5 = document.getElementById("p5");
+
 
   var d1 = document.getElementById("d1");
   var d2 = document.getElementById("d2");
   var d3 = document.getElementById("d3");
   var d4 = document.getElementById("d4");
+  var d5 = document.getElementById("d5");
+
 
   var y1 = document.getElementById("y1");
   var y2 = document.getElementById("y2");
@@ -81,6 +85,7 @@
     {img :'img/s10.png', Number:10},{img :'img/s11.png', Number:11},{img :'img/s12.png', Number:12},{img :'img/s13.png', Number:13} 
   ];
 
+
   for (let i = cards.length-1 ; i>0; i--){
     let r = rand(i);
     let tmp = cards[i];
@@ -96,7 +101,6 @@ console.log(deck1);
 
 
 
-console.log(d1.Number);
 
 
 // player用デッキ
@@ -119,7 +123,6 @@ document.getElementById('btn').onclick = function () {
  d4.Number = deck1[0].Number;
   deck1.shift();
 
- console.log(deck1)
 
  p1.src = deck2[0].img;
  p1.Number = deck2[0].Number;
@@ -133,142 +136,306 @@ document.getElementById('btn').onclick = function () {
  p4.src = deck2[0].img;
  p4.Number = deck2[0].Number;
   deck2.shift();
-}
+}　
 
 
 
-// 山に一斉にカード出す(ここ少し時差したい)
+// cardsetボタンで山にカードセット＆ディーラー開始
 document.getElementById('btn2').onclick = function () {
-  y1.src = deck1[0].img;
-  y1.Number = deck1[0].Number
-  deck1.shift();
+  // console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number) 
+ 
+  // cardsetした時にデッキにカードがない場合 
+      if (deck1.length === 0){
+        // まず山を非表示
+        d5.style.visibility ="hidden";
 
-  y2.src = deck2[0].img;
-  y2.Number = deck2[0].Number
-  deck2.shift();
-  //  カードなくなった場合　デッキの表示消す
-  // StartボタンfunctionーDealerが2秒ごとに攻める
- 
+        if(d1 !== null){  
+           y1.src = d1.img;
+           y1.Number = d1.Number
+           d1.Number=null
+           d1.style.visibility = "hidden"
+           return;
+        }
+        else if(d2 !== null){
+            y1.src = d2.img;
+            y1.Number = d2.Number
+            d2.Number=null
+            d2.style.visibility = "hidden"
+            return;
+        }
+          else if (d3 !== null){
+            y1.src = d3.img;
+            y1.Number = d3.Number
+            d3.Number=null
+            d3.style.visibility = "hidden"
+            return;          
+        }
+          else if (d4 !== null){
+            y1.src = d4.img;
+            y1.Number = d4.Number
+            d4.Number=null
+            d4.style.visibility = "hidden"
+            return;       
+        }
+          else{
+            alert("Delaer Win!");
+            location.reload();
+          }}
+      // デッキにカードある時はデッキから山に出す
+      else{
+        y1.src = deck1[0].img;
+        y1.Number = deck1[0].Number
+        deck1.shift();
+      }
+
+      // Playerも同じことする
+    
+      if(deck2.length === 0){
+        p5.style.visibility ="hidden";
+
+        if(p1 !== null){
+           y2.src = p1.img;
+           y2.Number = p1.Number
+           p1.Number=null
+           p1.style.visibility = "hidden"
+           return;
+        }
+        else if(p2 !== null){
+            y2.src = p2.img;
+            y2.Number = p2.Number
+            p2.Number=null
+            p2.style.visibility = "hidden"
+            return;
+        }
+          else if (p3 !== null){
+            y2.src = p3.img;
+            y2.Number = p3.Number
+            p3.Number=null
+             p3.style.visibility = "hidden"
+            return;          
+        }
+          else if (p4 !== null){
+            y2.src = p4.img;
+            y2.Number = p4.Number
+            p4.Number=null
+            p4.style.visibility = "hidden"
+            return;       
+        }
+          else{
+            return;
+          }
+      }
+      else{
+         y2.src = deck2[0].img;
+         y2.Number = deck2[0].Number
+        deck2.shift();
+        }
+
+  
+// ディーラーが3秒ごとに攻めてくる
+
   var dealer = function(){
-   console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
- 
+    // console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
+  //  console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
+  
+  // d1とy1
     if(d1.Number == y1.Number+1 ||d1.Number == y1.Number-1){
     y1.src = d1.src;
     y1.Number = d1.Number
-    console.log(y1.Number)
-    d1.src = deck1[0].img;
-    d1.Number = deck1[0].Number;
-    deck1.shift();
-    return;
+
+      if (deck1.length === 0){
+      d1.Number=null
+      d1.style.visibility = "hidden";}
+      else{
+      d1.src = deck1[0].img;
+      d1.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;  
   }
-    else if(d2.Number == y1.Number+1 ||d2.Number == y1.Number-1){
+
+  // d2とy1
+  else if(d2.Number == y1.Number+1 ||d2.Number == y1.Number-1){
     y1.src = d2.src; 
     y1.Number = d2.Number
-    console.log(y1.Number)
-    d2.src = deck1[0].img;
-    d2.Number = deck1[0].Number;
-
-    deck1.shift();  
-    return;
-  
+      if (deck1.length === 0){
+      d2.Number=null
+      d2.style.visibility = "hidden";}
+      else{
+      d2.src = deck1[0].img;
+      d2.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;
   }
- 
+   // d3とy1
     else if(d3.Number == y1.Number+1 || d3.Number == y1.Number-1){
     y1.src = d3.src;
     y1.Number = d3.Number;
-    console.log(y1.Number)
-    d3.src = deck1[0].img;
-    d3.Number = deck1[0].Number;
-    deck1.shift();
-    return;
+     if (deck1.length === 0){ 
+      d3.Number=null
+      d3.style.visibility = "hidden";}
+      else{
+      d3.src = deck1[0].img;
+      d3.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;
 
   }
-    else if(d4.Number == y1.Number+1 ||d4.Number == y1.Number-1){
+
+  // d4とy1
+    else if(d4.Number == y1.Number+1 ||d4.Number == y1.Number-1)
+    {
     y1.src = d4.src;
     y1.Number = d4.Number;
-    console.log(y1.Number)
-    d4.src = deck1[0].img;
-    d4.Number= deck1[0].Number;
-    deck1.shift();
-    return;
+      if (deck1.length === 0){
+      d4.Number=null
+      d4.style.visibility = "hidden";}
+      else{
+      d4.src = deck1[0].img;
+      d4.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;
 
   }
+  // d1とy2
     else if(d1.Number == y2.Number+1 ||d1.Number == y2.Number-1){ 
     y2.src = d1.src;
     y2.Number = d1.Number;
-    console.log(y2.Number)
-    d1.src = deck1[0].img;
-    d1.Number = deck1[0].Number;
-    deck1.shift();
-    return;
+      if (deck1.length === 0){
+      d1.Number=null
+      d1.style.visibility = "hidden";}
+      else{
+      d1.src = deck1[0].img;
+      d1.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;
 
   }
+
+  // d2とy2
    else if(d2.Number == y2.Number+1 ||d2.Number == y2.Number-1){
     y2.src = d2.src;
     y2.Number = d2.Number;
-    console.log(y2.Number)
-    d2.src = deck1[0].img;
-    d2.Number = deck1[0].Number;
-    deck1.shift();
-    return;
+      if (deck1.length === 0){
+      d2.Number=null
+      d2.style.visibility = "hidden";}
+      else{
+      d2.src = deck1[0].img; 
+      d2.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; 
+      }
+      return;
 
   }
+  // d3とy2
     else if(d3.Number == y2.Number+1 ||d3.Number == y2.Number-1){
     y2.src = d3.src;
     y2.Number = d3.Number;
-    console.log(y2.Number)
-    d3.src = deck1[0].img;
-    d3.Number = deck1[0].Number;
-    deck1.shift();
-    return;
+      if (deck1.length === 0){
+      d3.Number=null
+      d3.style.visibility = "hidden";} 
+      else{
+      d3.src = deck1[0].img;
+      d3.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; }
+      return;
 
   }
+
+   // d4とy2
     else if(d4.Number == y2.Number+1 ||d4.Number == y2.Number-1){
     y2.src = d4.src;
     y2.Number = d4.Number;
-    console.log(y2.Number)
-    d4.src = deck1[0].img; 
-    d4.Number = deck1[0].Number; 
-    deck1.shift();
-    return; 
+      if (deck1.length === 0){
+      d4.Number=null
+      d4.style.visibility = "hidden";}
+      else{
+      d4.src = deck1[0].img;
+      d4.Number = deck1[0].Number;
+      deck1.shift();}
+      if (deck1.length === 0){
+        d5.style.visibility ="hidden"; }
+      return;
 
   }
+  //  カードが0枚でどれも出せない場合
+    else if (deck1.length==0 && d1.Number==null && d2.Number==null && d3.Number==null && d4.Number==null)
+        {alert("Delaer Win!");
+  }
+  // カードはあるがどれも出せない場合
     else {
       return;
   }
-
+  
 };
-  setInterval(dealer, 3000);
-}
+  setInterval(dealer, 1000);
+
+  // if (deck1 = null){
+  // d5.style.visibility = "hidden";
+} 
+
 
 
 // それぞれFinish条件をつけていく
 
-if (deck1 = null){
-  
-} 
+// if (deck1 = null){
+//   d5.style.visibility = "hidden";
+// } 
+// if (deck2 = null){
+//   p5.style.visibility = "hidden";
+// } 
+
 
 document.getElementById("p1").onclick = function() {
- 
+
     if(p1.Number == y1.Number+1 || p1.Number == y1.Number-1){
     y1.src = p1.src;
     y1.Number = p1.Number;
-    p1.src = deck2[0].img;
-    p1.Number = deck2[0].Number;
-    deck2.shift();
-    return;
+      if (deck2.length === 0){
+      p1.style.visibility = "hidden";}
+      else{
+      p1.src = deck2[0].img;
+      p1.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
   }
+
     else if(p1.Number == y2.Number+1 || p1.Number == y2.Number-1){
     y2.src = p1.src;
     y2.Number = p1.Number;
-    p1.src = deck2[0].img;
-    p1.Number = deck2[0].Number;
-    deck2.shift();
-    return;
+      if (deck2.length === 0){
+      p1.style.visibility = "hidden";}
+      else{
+      p1.src = deck2[0].img;
+      p1.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
   }
-  else{
+  else{ 
       alert ('No!')
     }
+    if(deck2.length === 0){
+        p5.style.visibility ="hidden";
+      }
   }  
   // 1つ成功すると続々と入るようになっちゃう！
 
@@ -277,66 +444,107 @@ document.getElementById("p2").onclick = function() {
     if(p2.Number == y1.Number+1 ||p2.Number == y1.Number-1 ){
     y1.src = p2.src;
     y1.Number = p2.Number;
-    p2.src = deck2[0].img;
-    p2.Number = deck2[0].Number;
-    deck2.shift();
+      if (deck2.length === 0){
+      p2.style.visibility = "hidden";}
+      else{
+      p2.src = deck2[0].img;
+      p2.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
   }
     else if(p2.Number == y2.Number+1 || p2.Number == y2.Number-1){
     y2.src = p2.src;
     y2.Number = p2.Number;
-    console.log(y2.Number)
-    p2.src = deck2[0].img;
-    p2.Number = deck2[0].Number;
+      if (deck2.length === 0){
+      p2.style.visibility = "hidden";}
+      else{
+      p2.src = deck2[0].img;
+      p2.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
 
-    deck2.shift();
   }
 
     else{
       alert ('No!')
-    }
+    } 
+    if(deck2.length === 0){
+        p5.style.visibility ="hidden";
+      }
   }  
+
+
   document.getElementById("p3").onclick = function() {
  
     if(p3.Number == y1.Number+1 || p3.Number == y1.Number-1){
     y1.src = p3.src;
     y1.Number = p3.Number;
-    p3.src = deck2[0].img;
-    p3.Number = deck2[0].Number;
-    deck2.shift();
+      if (deck2.length === 0){
+      p3.style.visibility = "hidden";}
+      else{
+      p3.src = deck2[0].img;
+      p3.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
   }
     else if(p3.Number == y2.Number+1 ||p3.Number == y2.Number-1){
     y2.src = p3.src;
     y2.Number = p3.Number;
-    p3.src = deck2[0].img;
-    p3.Number = deck2[0].Number;
-    deck2.shift();
+      if (deck2.length === 0){
+      p3.style.visibility = "hidden";}
+      else{
+      p3.src = deck2[0].img;
+      p3.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
   }
 
     else{
       alert ('No!')
     }
+    if(deck2.length === 0){
+        p5.style.visibility ="hidden";
+      }
   }  
+
+
   document.getElementById("p4").onclick = function() {
  
     if(p4.Number == y1.Number+1 ||p4.Number == y1.Number-1){
     y1.src = p4.src;
     y1.Number = p4.Number;
-    p4.src = deck2[0].img;
-    p4.Number = deck2[0].Number;
-    deck2.shift();
-  }
+      if (deck2.length === 0){
+      p4.style.visibility = "hidden";}
+      else{
+      p4.src = deck2[0].img;
+      p4.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
+  } 
     else if(p4.Number == y2.Number+1 || p4.Number == y2.Number-1){
     y2.src = p4.src;
     y2.Number = p4.Number;
-    p4.src = deck2[0].img;
-    p4.Number = deck2[0].Number;
-    deck2.shift();
+      if (deck2.length === 0){
+      p4.style.visibility = "hidden";}
+      else{
+      p4.src = deck2[0].img;
+      p4.Number = deck2[0].Number;
+      deck2.shift();}
+      console.log(deck2.length)
+
   }
 
     else{
       alert ('No!')
     }
-  }  
+    if(deck2.length === 0){
+        p5.style.visibility ="hidden";
+      }
+  }
     </script>
   </body>
 </html>
@@ -344,4 +552,3 @@ document.getElementById("p2").onclick = function() {
 
 <!-- 1と13の関係 -->
 <!-- 勝ち条件設定 -->
-<!-- カードなくなったら消えるように -->
