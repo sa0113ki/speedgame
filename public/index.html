@@ -141,7 +141,7 @@ document.getElementById('btn').onclick = function () {
 
 // cardsetボタンで山にカードセット＆ディーラー開始 
 document.getElementById('btn2').onclick = function () { 
-  console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
+  console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number,p1.Number,p2.Number,p3.Number,p4.Number)
   // cardsetした時にデッキにカードがない場合 
       if (deck1.length === 0 && d1.Number !== null){
         // まずデッキを非表示
@@ -150,16 +150,27 @@ document.getElementById('btn2').onclick = function () {
         y1.Number = d1.Number
         d1.Number=null
         d1.style.visibility = "hidden"
-        return;
-      }
+        if(d1.Number ==null && d2.Number ==null && d3.Number ==null && d4.Number ==null)
+          {
+            alert("Dealer Win!");
+          }
+          else{
+          return;       
+        }}
+
       else if (deck1.length === 0 && d2.Number !== null){
         d5.style.visibility ="hidden";
         y1.src = d2.src;
         y1.Number = d2.Number
         d2.Number=null
         d2.style.visibility = "hidden"
-        return;
-        }
+        if(d1.Number ==null && d2.Number ==null && d3.Number ==null && d4.Number ==null)
+          {
+            alert("Dealer Win!");
+          }
+          else{
+          return;       
+        }}
 
         else if (deck1.length === 0 && d3.Number !== null){
           d5.style.visibility ="hidden";
@@ -167,8 +178,13 @@ document.getElementById('btn2').onclick = function () {
           y1.Number = d3.Number
           d3.Number=null
           d3.style.visibility = "hidden"
-          return;          
-        }
+          if(d1.Number ==null && d2.Number ==null && d3.Number ==null && d4.Number ==null)
+          {
+            alert("Dealer Win!");
+          }
+          else{
+          return;       
+        }}
 
           else if (deck1.length === 0 && d4.Number !== null){
           d5.style.visibility ="hidden";
@@ -176,8 +192,13 @@ document.getElementById('btn2').onclick = function () {
           y1.Number = d4.Number
           d4.Number=null
           d4.style.visibility = "hidden"
+          if(d1.Number ==null && d2.Number ==null && d3.Number ==null && d4.Number ==null)
+          {
+            alert("Dealer Win!");
+          }
+          else{
           return;       
-        }
+        }}
 
           else if (deck1.length !== 0){
            y1.src = deck1[0].img;
@@ -186,7 +207,6 @@ document.getElementById('btn2').onclick = function () {
         } 
 
         else{
-          alert("Delaer Win!");
           return;
         }
       
@@ -198,32 +218,58 @@ document.getElementById('btn2').onclick = function () {
            y2.Number = p1.Number
            p1.Number=null
            p1.style.visibility = "hidden"
-           return;
-        }
+          if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+            return;
+          }
+          else{
+          return;       
+        }}
+
         else if(deck2.length === 0 && p2.Number !== null){
             p5.style.visibility ="hidden";
             y2.src = p2.src;
             y2.Number = p2.Number
             p2.Number=null
             p2.style.visibility = "hidden"
+            if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
             return;
-        }
-          else if (deck2.length ===0 && p3.Number !== null){
-            p5.style.visibility ="hidden";
-            y2.src = p3.src;
-            y2.Number = p3.Number
-            p3.Number=null
-             p3.style.visibility = "hidden"
-            return;          
-        }
-          else if (deck2.length ===0 && p4.Number !== null){
-            p5.style.visibility ="hidden";
-            y2.src = p4.src;
-            y2.Number = p4.Number
-            p4.Number=null
-            p4.style.visibility = "hidden"
-            return;       
-        }
+          }
+          else{
+          return;       
+        }}
+
+
+        else if (deck2.length === 0 && p3.Number !== null){
+          p5.style.visibility ="hidden";
+          y2.src = p3.src;
+          y2.Number = p3.Number
+          p3.Number=null
+          p3.style.visibility = "hidden"
+          if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }}
+
+        else if (deck2.length === 0 && p4.Number !== null){
+          p5.style.visibility ="hidden";
+          y2.src = p4.src;
+          y2.Number = p4.Number
+          p4.Number=null
+          p4.style.visibility = "hidden"
+          if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }}
 
           else if (deck1.length !== 0){
             y2.src = deck2[0].img;
@@ -231,8 +277,6 @@ document.getElementById('btn2').onclick = function () {
             deck2.shift();
         }
         else{
-          alert("You Win!");
-          // これ出るタイミング
           return;
         }
       }
@@ -261,7 +305,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;  
   }
 
   // d2とy1
@@ -279,7 +322,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;
   }
    // d3とy1
    else if((d3.Number == y1.Number+1) || (d3.Number == y1.Number-1) ||
@@ -296,7 +338,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;
 
   }
 
@@ -315,7 +356,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;
 
   }
   // d1とy2
@@ -333,7 +373,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;
 
   }
 
@@ -352,7 +391,6 @@ document.getElementById('btn2').onclick = function () {
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; 
       }
-      return;
 
   }
   // d3とy2
@@ -369,7 +407,6 @@ document.getElementById('btn2').onclick = function () {
       deck1.shift();}
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; }
-      return;
 
   }
 
@@ -387,13 +424,11 @@ document.getElementById('btn2').onclick = function () {
       deck1.shift();}
       if (deck1.length === 0){
         d5.style.visibility ="hidden"; }
-      return;
 
   }
   //  カードが0枚でどれも出せない場合
     else if (deck1.length==0 && d1.Number==null && d2.Number==null && d3.Number==null && d4.Number==null)
         {alert("Delaer Win!");
-        return;
   }
   // カードはあるがどれも出せない場合
     else {
@@ -403,22 +438,9 @@ document.getElementById('btn2').onclick = function () {
 };
   setInterval(dealer, 3000);
 
-  // if (deck1 = null){
-  // d5.style.visibility = "hidden";
-
-
-
-
-// それぞれFinish条件をつけていく
-
-// if (deck1 = null){
-//   d5.style.visibility = "hidden";
-// } 
-// if (deck2 = null){
-//   p5.style.visibility = "hidden";
-// } 
-
-
+  
+// Player側　カードクリック
+      // p1を押した時
 document.getElementById("p1").onclick = function() {
 
     if((p1.Number == y1.Number+1) || (p1.Number == y1.Number-1) ||
@@ -432,7 +454,6 @@ document.getElementById("p1").onclick = function() {
       p1.src = deck2[0].img;
       p1.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
   }
 
     else if((p1.Number == y2.Number+1 || p1.Number == y2.Number-1)||
@@ -447,7 +468,7 @@ document.getElementById("p1").onclick = function() {
       p1.src = deck2[0].img;
       p1.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
+
 
   }
     
@@ -458,9 +479,17 @@ document.getElementById("p1").onclick = function() {
     if(deck2.length === 0){
         p5.style.visibility ="hidden";
       }
-  }  
-  // 1つ成功すると続々と入るようになっちゃう！
 
+
+    if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }
+  }  
+// p2を押した時
 document.getElementById("p2").onclick = function() {
  
   if((p2.Number == y1.Number+1) || (p2.Number == y1.Number-1) ||
@@ -474,7 +503,6 @@ document.getElementById("p2").onclick = function() {
       p2.src = deck2[0].img;
       p2.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
 
   }
     else  if((p2.Number == y2.Number+1) || (p2.Number == y2.Number-1) ||
@@ -488,7 +516,6 @@ document.getElementById("p2").onclick = function() {
       p2.src = deck2[0].img;
       p2.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
 
   }
 
@@ -498,9 +525,16 @@ document.getElementById("p2").onclick = function() {
     if(deck2.length === 0){
         p5.style.visibility ="hidden";
       }
+    if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }
   }  
 
-
+// p3を押した時
   document.getElementById("p3").onclick = function() {
  
     if((p3.Number == y1.Number+1) || (p3.Number == y1.Number-1) ||
@@ -514,7 +548,6 @@ document.getElementById("p2").onclick = function() {
       p3.src = deck2[0].img;
       p3.Number = deck2[0].Number;
       deck2.shift();} 
-      console.log(deck2.length)
 
   }
     else  if((p3.Number == y2.Number+1) || (p3.Number == y2.Number-1) ||
@@ -528,7 +561,6 @@ document.getElementById("p2").onclick = function() {
       p3.src = deck2[0].img;
       p3.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
 
   }
 
@@ -538,9 +570,17 @@ document.getElementById("p2").onclick = function() {
     if(deck2.length === 0){
         p5.style.visibility ="hidden";
       }
+
+      if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }
   }  
 
-
+// p4を押した時
   document.getElementById("p4").onclick = function() {
  
     if((p4.Number == y1.Number+1) || (p4.Number == y1.Number-1) ||
@@ -554,7 +594,6 @@ document.getElementById("p2").onclick = function() {
       p4.src = deck2[0].img;
       p4.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
 
   } 
     else  if((p4.Number == y2.Number+1) || (p4.Number == y2.Number-1) ||
@@ -568,7 +607,6 @@ document.getElementById("p2").onclick = function() {
       p4.src = deck2[0].img;
       p4.Number = deck2[0].Number;
       deck2.shift();}
-      console.log(deck2.length)
 
   }
 
@@ -578,11 +616,16 @@ document.getElementById("p2").onclick = function() {
     if(deck2.length === 0){
         p5.style.visibility ="hidden";
       }
+
+      if(p1.Number ==null && p2.Number ==null && p3.Number ==null && p4.Number ==null)
+          {
+            alert("You Win!");
+          }
+          else{
+          return;       
+        }
   }
     </script>
   </body>
 </html>
 
-
-<!-- 1と13の関係 -->
-<!-- 勝ち条件設定 -->
