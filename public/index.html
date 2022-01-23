@@ -139,97 +139,104 @@ document.getElementById('btn').onclick = function () {
 }　
 
 
-
-// cardsetボタンで山にカードセット＆ディーラー開始
-document.getElementById('btn2').onclick = function () {
-  // console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number) 
- 
+// cardsetボタンで山にカードセット＆ディーラー開始 
+document.getElementById('btn2').onclick = function () { 
+  console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
   // cardsetした時にデッキにカードがない場合 
-      if (deck1.length === 0){
-        // まず山を非表示
+      if (deck1.length === 0 && d1.Number !== null){
+        // まずデッキを非表示
         d5.style.visibility ="hidden";
-
-        if(d1 !== null){  
-           y1.src = d1.img;
-           y1.Number = d1.Number
-           d1.Number=null
-           d1.style.visibility = "hidden"
-           return;
-        }
-        else if(d2 !== null){
-            y1.src = d2.img;
-            y1.Number = d2.Number
-            d2.Number=null
-            d2.style.visibility = "hidden"
-            return;
-        }
-          else if (d3 !== null){
-            y1.src = d3.img;
-            y1.Number = d3.Number
-            d3.Number=null
-            d3.style.visibility = "hidden"
-            return;          
-        }
-          else if (d4 !== null){
-            y1.src = d4.img;
-            y1.Number = d4.Number
-            d4.Number=null
-            d4.style.visibility = "hidden"
-            return;       
-        }
-          else{
-            alert("Delaer Win!");
-            location.reload();
-          }}
-      // デッキにカードある時はデッキから山に出す
-      else{
-        y1.src = deck1[0].img;
-        y1.Number = deck1[0].Number
-        deck1.shift();
+        y1.src = d1.src;
+        y1.Number = d1.Number
+        d1.Number=null
+        d1.style.visibility = "hidden"
+        return;
       }
+      else if (deck1.length === 0 && d2.Number !== null){
+        d5.style.visibility ="hidden";
+        y1.src = d2.src;
+        y1.Number = d2.Number
+        d2.Number=null
+        d2.style.visibility = "hidden"
+        return;
+        }
+
+        else if (deck1.length === 0 && d3.Number !== null){
+          d5.style.visibility ="hidden";
+          y1.src = d3.src;
+          y1.Number = d3.Number
+          d3.Number=null
+          d3.style.visibility = "hidden"
+          return;          
+        }
+
+          else if (deck1.length === 0 && d4.Number !== null){
+          d5.style.visibility ="hidden";
+          y1.src = d4.src;
+          y1.Number = d4.Number
+          d4.Number=null
+          d4.style.visibility = "hidden"
+          return;       
+        }
+
+          else if (deck1.length !== 0){
+           y1.src = deck1[0].img;
+           y1.Number = deck1[0].Number
+           deck1.shift();
+        } 
+
+        else{
+          alert("Delaer Win!");
+          return;
+        }
+      
 
       // Playerも同じことする
-    
-      if(deck2.length === 0){
-        p5.style.visibility ="hidden";
-
-        if(p1 !== null){
-           y2.src = p1.img;
+      if (deck2.length === 0 && p1.Number !== null){
+           p5.style.visibility ="hidden";
+           y2.src = p1.src;
            y2.Number = p1.Number
            p1.Number=null
            p1.style.visibility = "hidden"
            return;
         }
-        else if(p2 !== null){
-            y2.src = p2.img;
+        else if(deck2.length === 0 && p2.Number !== null){
+            p5.style.visibility ="hidden";
+            y2.src = p2.src;
             y2.Number = p2.Number
             p2.Number=null
             p2.style.visibility = "hidden"
             return;
         }
-          else if (p3 !== null){
-            y2.src = p3.img;
+          else if (deck2.length ===0 && p3.Number !== null){
+            p5.style.visibility ="hidden";
+            y2.src = p3.src;
             y2.Number = p3.Number
             p3.Number=null
              p3.style.visibility = "hidden"
             return;          
         }
-          else if (p4 !== null){
-            y2.src = p4.img;
+          else if (deck2.length ===0 && p4.Number !== null){
+            p5.style.visibility ="hidden";
+            y2.src = p4.src;
             y2.Number = p4.Number
             p4.Number=null
             p4.style.visibility = "hidden"
             return;       
         }
-          else{
-            return;
-          }
-      }
-      else{
-         y2.src = deck2[0].img;
-         y2.Number = deck2[0].Number
-        deck2.shift();
+
+          else if (deck1.length !== 0){
+            y2.src = deck2[0].img;
+            y2.Number = deck2[0].Number
+            deck2.shift();
         }
+        else{
+          alert("You Win!");
+          // これ出るタイミング
+          return;
+        }
+      }
+        
 
   
 // ディーラーが3秒ごとに攻めてくる
@@ -386,11 +393,11 @@ document.getElementById('btn2').onclick = function () {
   }
   
 };
-  setInterval(dealer, 1000);
+  setInterval(dealer, 3000);
 
   // if (deck1 = null){
   // d5.style.visibility = "hidden";
-} 
+
 
 
 
@@ -410,6 +417,7 @@ document.getElementById("p1").onclick = function() {
     y1.src = p1.src;
     y1.Number = p1.Number;
       if (deck2.length === 0){
+      p1.Number= null;
       p1.style.visibility = "hidden";}
       else{
       p1.src = deck2[0].img;
@@ -422,6 +430,7 @@ document.getElementById("p1").onclick = function() {
     y2.src = p1.src;
     y2.Number = p1.Number;
       if (deck2.length === 0){
+      p1.Number= null;
       p1.style.visibility = "hidden";}
       else{
       p1.src = deck2[0].img;
@@ -445,6 +454,7 @@ document.getElementById("p2").onclick = function() {
     y1.src = p2.src;
     y1.Number = p2.Number;
       if (deck2.length === 0){
+      p2.Number= null;
       p2.style.visibility = "hidden";}
       else{
       p2.src = deck2[0].img;
@@ -457,6 +467,7 @@ document.getElementById("p2").onclick = function() {
     y2.src = p2.src;
     y2.Number = p2.Number;
       if (deck2.length === 0){
+      p2.Number= null;
       p2.style.visibility = "hidden";}
       else{
       p2.src = deck2[0].img;
@@ -481,6 +492,7 @@ document.getElementById("p2").onclick = function() {
     y1.src = p3.src;
     y1.Number = p3.Number;
       if (deck2.length === 0){
+      p3.Number= null;
       p3.style.visibility = "hidden";}
       else{
       p3.src = deck2[0].img;
@@ -493,6 +505,7 @@ document.getElementById("p2").onclick = function() {
     y2.src = p3.src;
     y2.Number = p3.Number;
       if (deck2.length === 0){
+      p3.Number= null;
       p3.style.visibility = "hidden";}
       else{
       p3.src = deck2[0].img;
@@ -517,6 +530,7 @@ document.getElementById("p2").onclick = function() {
     y1.src = p4.src;
     y1.Number = p4.Number;
       if (deck2.length === 0){
+      p4.Number= null;
       p4.style.visibility = "hidden";}
       else{
       p4.src = deck2[0].img;
@@ -529,6 +543,7 @@ document.getElementById("p2").onclick = function() {
     y2.src = p4.src;
     y2.Number = p4.Number;
       if (deck2.length === 0){
+      p4.Number= null;
       p4.style.visibility = "hidden";}
       else{
       p4.src = deck2[0].img;
