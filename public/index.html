@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="index.css">
     <title>Speed Game</title>
-    <link rel="icon" href="https://img.icons8.com/ios/50/000000/ace-of-hearts.png"/>">
+    <link rel="icon" href="https://img.icons8.com/ios/50/000000/ace-of-hearts.png"/>
   </head>
   <body>
     <div><input id="btn" type="button" value="Start" class="btn" />
@@ -16,13 +16,12 @@
   </div>
  
 
-  <div class="container1" >
+  <div class="container1">
         <img src= "back.png" id="d1" class="card" ></img>
         <img src= "back.png" id="d2" class="card" ></img>
         <img src= "back.png" id="d3" class="card" ></img>
         <img src= "back.png" id="d4" class="card" ></img>
         <img src= "back.png" id="d5" class="card" ></img>
-
 
   </div>
   <div class="container2">
@@ -85,7 +84,7 @@
     {img :'img/s5.png', Number:5},{img :'img/s6.png', Number:6},{img :'img/s7.png', Number:7},{img :'img/s8.png', Number:8},{img :'img/s9.png', Number:9},
     {img :'img/s10.png', Number:10},{img :'img/s11.png', Number:11},{img :'img/s12.png', Number:12},{img :'img/s13.png', Number:13} 
   ];
-
+// コンポーネン可能
 
   for (let i = cards.length-1 ; i>0; i--){
     let r = rand(i);
@@ -291,6 +290,7 @@ document.getElementById('btn2').onclick = function () {
   //  console.log(d1.Number,d2.Number,d3.Number,d4.Number,y1.Number,y2.Number)
   
   // d1とy1
+
   if((d1.Number == y1.Number+1) || (d1.Number == y1.Number-1) ||
     (d1.Number == 1 && y1.Number == 13)||(d1.Number ==13 && y1.Number ==1)){    
       y1.src = d1.src;
@@ -437,7 +437,7 @@ document.getElementById('btn2').onclick = function () {
   }
   
 };
-  setInterval(dealer, 3000);
+  setInterval(dealer, 2000);
 
   
 // Player側　カードクリック
